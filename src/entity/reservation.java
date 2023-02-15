@@ -11,15 +11,15 @@ package entity;
 public class reservation {
     private int idRes;
     private event idEvent;
-    private user idUser;
+    private User idUser;
 
-    public reservation(int idRes, event idEvent, user idUser) {
+    public reservation(int idRes, event idEvent, User idUser) {
         this.idRes = idRes;
         this.idEvent = idEvent;
         this.idUser = idUser;
     }
 
-    public reservation(event idEvent, user idUser) {
+    public reservation(event idEvent, User idUser) {
         this.idEvent = idEvent;
         this.idUser = idUser;
     }
@@ -32,7 +32,7 @@ public class reservation {
         return idEvent;
     }
 
-    public user getIdUser() {
+    public User getIdUser() {
         return idUser;
     }
 
@@ -44,7 +44,7 @@ public class reservation {
         this.idEvent = idEvent;
     }
 
-    public void setIdUser(user idUser) {
+    public void setIdUser(User idUser) {
         this.idUser = idUser;
     }
 
