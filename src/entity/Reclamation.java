@@ -12,7 +12,7 @@ import java.sql.Date;
 public class Reclamation {
     private int idreclamation;
     private Produit produit;
-    private event event;
+    private Event event;
     private String nomReclamation;
     private String historique;
     private Date dateReclamation;
@@ -47,7 +47,7 @@ public class Reclamation {
         this.motif = motif;
     }
 
-    public Reclamation( event event, String nomReclamation, String historique, Date dateReclamation, String etatReclamation, String motif) {
+    public Reclamation( Event event, String nomReclamation, String historique, Date dateReclamation, String etatReclamation, String motif) {
    
         this.event = event;
         this.nomReclamation = nomReclamation;
@@ -73,11 +73,11 @@ public class Reclamation {
         this.produit = produit;
     }
 
-    public event getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(event event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 
