@@ -16,30 +16,44 @@ public class event {
     private LocalDate DateDebut;
     private LocalDate DateFin;
     private String Localisation;
-    private String Descripton;
-    private String Heure;
+    private String Description;
+    private String HeureEvent;
     private Float prix;
     private String PhotoE;
 
-    public event(int idEvent, String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Descripton, String Heure, Float prix, String PhotoE) {
+    public event() {
+    }
+
+    public event(int idEvent) {
+        this.idEvent = idEvent;
+    }
+
+    public event(int idEvent, String NomEvent) {
+        this.idEvent = idEvent;
+        this.NomEvent = NomEvent;
+    }
+
+    
+    
+    public event(int idEvent, String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Description, String HeureEvent, Float prix, String PhotoE) {
         this.idEvent = idEvent;
         this.NomEvent = NomEvent;
         this.DateDebut = DateDebut;
         this.DateFin = DateFin;
         this.Localisation = Localisation;
-        this.Descripton = Descripton;
-        this.Heure = Heure;
+        this.Description = Description;
+        this.HeureEvent = HeureEvent;
         this.prix = prix;
         this.PhotoE = PhotoE;
     }
 
-    public event(String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Descripton, String Heure, Float prix, String PhotoE) {
+    public event(String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Description, String HeureEvent, Float prix, String PhotoE) {
         this.NomEvent = NomEvent;
         this.DateDebut = DateDebut;
         this.DateFin = DateFin;
         this.Localisation = Localisation;
-        this.Descripton = Descripton;
-        this.Heure = Heure;
+        this.Description = Description;
+        this.HeureEvent = HeureEvent;
         this.prix = prix;
         this.PhotoE = PhotoE;
     }
@@ -64,12 +78,12 @@ public class event {
         return Localisation;
     }
 
-    public String getDescripton() {
-        return Descripton;
+    public String getDescription() {
+        return Description;
     }
 
-    public String getHeure() {
-        return Heure;
+    public String getHeureEvent() {
+        return HeureEvent;
     }
 
     public Float getPrix() {
@@ -100,12 +114,12 @@ public class event {
         this.Localisation = Localisation;
     }
 
-    public void setDescripton(String Descripton) {
-        this.Descripton = Descripton;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
-    public void setHeure(String Heure) {
-        this.Heure = Heure;
+    public void setHeureEvent(String HeureEvent) {
+        this.HeureEvent = HeureEvent;
     }
 
     public void setPrix(Float prix) {
@@ -118,7 +132,7 @@ public class event {
 
     @Override
     public String toString() {
-        return "event{" + "idEvent=" + idEvent + ", NomEvent=" + NomEvent + ", DateDebut=" + DateDebut + ", DateFin=" + DateFin + ", Localisation=" + Localisation + ", Descripton=" + Descripton + ", Heure=" + Heure + ", prix=" + prix + ", PhotoE=" + PhotoE + '}';
+        return "event{" + "idEvent=" + idEvent + ", NomEvent=" + NomEvent + ", DateDebut=" + DateDebut + ", DateFin=" + DateFin + ", Localisation=" + Localisation + ", Description=" + Description + ", HeureEvent=" + HeureEvent + ", prix=" + prix + ", PhotoE=" + PhotoE + '}';
     }
     
     
