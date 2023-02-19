@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  * @author ASUS
  */
-public class Event {
+public class event {
      private int idEvent;
     private String NomEvent;
     private LocalDate DateDebut;
@@ -21,7 +21,7 @@ public class Event {
     private Float prix;
     private String PhotoE;
 
-    public Event(int idEvent, String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Descripton, String Heure, Float prix, String PhotoE) {
+    public event(int idEvent, String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Descripton, String Heure, Float prix, String PhotoE) {
         this.idEvent = idEvent;
         this.NomEvent = NomEvent;
         this.DateDebut = DateDebut;
@@ -33,7 +33,7 @@ public class Event {
         this.PhotoE = PhotoE;
     }
 
-    public Event(String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Descripton, String Heure, Float prix, String PhotoE) {
+    public event(String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Descripton, String Heure, Float prix, String PhotoE) {
         this.NomEvent = NomEvent;
         this.DateDebut = DateDebut;
         this.DateFin = DateFin;
