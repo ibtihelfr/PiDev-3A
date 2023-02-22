@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="932.0" style="-fx-background-color: #010101;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.produit_chedi.gui.InsertController">
+   <children>
+      <Pane layoutX="-242.0" layoutY="14.0" opacity="0.63" prefHeight="86.0" prefWidth="578.0" styleClass="proright" stylesheets="@../../Downloads/TestBD/TestBD/src/Css/produit.css">
+         <children>
+            <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="253.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Downloads/TestBD/TestBD/src/Css/icons8-product-64.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="336.0" layoutY="30.0" prefHeight="27.0" prefWidth="234.0" text="ajouter un nouveu produit" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <TextField fx:id="txtID" focusTraversable="false" layoutX="140.0" layoutY="124.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </TextField>
+      <TextField fx:id="txtNom" focusTraversable="false" layoutX="140.0" layoutY="175.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </TextField>
+      <Button fx:id="btnAdd" focusTraversable="false" layoutX="166.0" layoutY="495.0" mnemonicParsing="false" onAction="#Add" prefHeight="42.0" prefWidth="138.0" style="-fx-background-radius: 50;" styleClass="gradientmaincolor" stylesheets="@../../Downloads/TestBD/TestBD/src/Css/produit.css" text="   Ajouter" textFill="#fcf8f8">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="43.0" fitWidth="75.0" layoutX="166.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Downloads/TestBD/TestBD/src/Css/add.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="43.0" fitWidth="75.0" layoutX="336.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Downloads/TestBD/TestBD/src/Css/icons8-update-100.png" />
+         </image>
+      </ImageView>
+      <Text fill="#efe9e9" layoutX="38.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Produit" wrappingWidth="118.0081787109375">
+         <font>
+            <Font name="Cambria" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#efe9e9" fontSmoothingType="LCD" layoutX="38.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Produit" wrappingWidth="118.0081787109375">
+         <font>
+            <Font name="Cambria" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#efe9e9" layoutX="38.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description produit" wrappingWidth="118.0081787109375">
+         <font>
+            <Font name="Cambria" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#efe9e9" layoutX="38.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Produit" wrappingWidth="118.0081787109375">
+         <font>
+            <Font name="Cambria" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#efe9e9" layoutX="38.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Produit" wrappingWidth="118.0081787109375">
+         <font>
+            <Font name="Cambria" size="12.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnExit" focusTraversable="false" layoutX="388.0" layoutY="14.0" mnemonicParsing="false" onAction="#Exit" prefHeight="27.0" prefWidth="43.0" style="-fx-background-radius: 50;" styleClass="gradientmaincolor" stylesheets="@../../Downloads/TestBD/TestBD/src/Css/produit.css" text="X" textFill="#fcf8f8">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="txtDesc" focusTraversable="false" layoutX="140.0" layoutY="226.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </TextField>
+      <TextField fx:id="txtDate" focusTraversable="false" layoutX="140.0" layoutY="279.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </TextField>
+      <TextField fx:id="txtQte" focusTraversable="false" layoutX="140.0" layoutY="380.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </TextField>
+      <TextField fx:id="txtPrix" focusTraversable="false" layoutX="140.0" layoutY="330.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-radius: 50;">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </TextField>
+      <Text fill="#efe9e9" layoutX="38.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité Produit" wrappingWidth="118.0081787109375">
+         <font>
+            <Font name="Cambria" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#efe9e9" layoutX="38.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Produit" wrappingWidth="118.0081787109375">
+         <font>
+            <Font name="Cambria" size="12.0" />
+         </font>
+      </Text>
+      <TableView layoutX="372.0" layoutY="146.0" prefHeight="246.0" prefWidth="534.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnModifier" focusTraversable="false" layoutX="319.0" layoutY="495.0" mnemonicParsing="false" onAction="#Add" prefHeight="42.0" prefWidth="138.0" style="-fx-background-radius: 50;" styleClass="gradientmaincolor" stylesheets="@../../Downloads/TestBD/TestBD/src/Css/produit.css" text="   Modifier" textFill="#fcf8f8">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnDelete" focusTraversable="false" layoutX="473.0" layoutY="495.0" mnemonicParsing="false" onAction="#Add" prefHeight="42.0" prefWidth="138.0" style="-fx-background-radius: 50;" styleClass="gradientmaincolor" stylesheets="@../../Downloads/TestBD/TestBD/src/Css/produit.css" text="Supprimer" textFill="#fcf8f8">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnAdd3" focusTraversable="false" layoutX="627.0" layoutY="495.0" mnemonicParsing="false" onAction="#Add" prefHeight="42.0" prefWidth="138.0" style="-fx-background-radius: 50;" styleClass="gradientmaincolor" stylesheets="@../../Downloads/TestBD/TestBD/src/Css/produit.css" text="   Ajouter" textFill="#fcf8f8">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

@@ -1,0 +1,249 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+
+
+
+
+.colortext{
+    -fx-text-fill : #ffffff;
+}
+.colorx{
+   -fx-text-fill : linear-gradient(to right bottom, #3d156b, #401fca, #950ece);
+    
+    
+}
+.gradientmaincolor{
+    
+    -fx-background-color : linear-gradient(to right bottom,  #47c3fd,#950ece,#401fca);
+}
+.proright
+{
+-fx-background-color : linear-gradient(to right bottom, #47c3fd, #401fca, #950ece);
+-fx-background-radius :  0 110 0 0;
+}
+.button1
+{
+-fx-background-color : #47c3fd;
+-fx-background-radius :  30 0 0 30;
+}
+.logo
+{
+-fx-background-color :#FFFFFF;
+-fx-background-radius :  0 0 50 50;
+}
+.button1:hover
+{
+-fx-background-color : #93f9b911 ;
+-fx-background-radius :  30 0 0 30;
+}
+
+.button1:pressed
+{
+-fx-background-color : #2F2B43 ;
+-fx-background-radius :  30 0 0 30;
+}
+
+.button2
+{
+-fx-background-color : #393351;
+-fx-background-radius :  20;
+}
+.button2:hover
+{
+-fx-background-color : #524A7B ;
+-fx-background-radius :  20;
+}
+.button2:pressed
+{
+-fx-background-color : #2F2B43 ;
+-fx-background-radius :  20;
+}
+
+.button3
+{
+    -fx-background-color : #141124;
+    -fx-background-radius :  0 0 0 0;
+}
+.button3:hover
+{
+    -fx-background-color : #524A7B ;
+}
+.button3:pressed
+{
+    -fx-background-color : #2F2B43 ;
+}
+
+.button4
+{
+    -fx-background-color: linear-gradient(to bottom left, #401fca, #950ece);
+    -fx-background-radius :  30 30 30 30;
+}
+.button4:hover
+{
+    -fx-background-color :linear-gradient(to top left, #A868A0, #2D75E8);
+    -fx-background-radius :  30 30 30 30;
+}
+.button4:pressed
+{
+    -fx-background-color :linear-gradient(to top left,  #950ece,#401fca);
+    -fx-background-radius :  30 30 30 30;
+}
+/*.table-row-cell:highlighted {
+    -fx-background-color : linear-gradient(to right bottom, #00FFFF, #FFE53B);
+    -fx-background-radius: 15px;
+}*/
+
+.combo-box
+{
+    -fx-background-color : #141124;
+    -fx-border-color:  #141124;
+    -fx-border-radius: 30;
+    -fx-text-fill: blueviolet;
+    
+   -fx-font-weight: bold;
+   -fx-alignment: CENTER_LEFT;
+}
+.combo-box:hover
+{
+    -fx-background-color : #141124;
+    -fx-border-radius: 30;
+}
+.combo-box:pressed
+{
+    -fx-background-color : #141124;
+    -fx-border-radius: 30;
+}
+.table-view {
+    -fx-background-color: transparent;
+}
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+/*.table-view .column-header {
+    -fx-background-color: transparent;
+}*/
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom,  #950ece,#47c3fd);
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+.table-row-cell:hover {
+    -fx-background-color : linear-gradient(to right bottom, #47c3fd, #47c3fd, #950ece);
+    -fx-text-background-color: blue;
+}
+.table-row-cell:odd{
+     -fx-background-color : linear-gradient(to right bottom,  #950ece,#47c3fd);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even{
+     -fx-background-color : linear-gradient(to right bottom, #47c3fd,  #950ece);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #47c3fd, #401fca);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right,  #47c3fd, #401fca);
+}
+.table-row-cell:highlighted {
+    -fx-background-color:  #401fca;
+    -fx-background-radius: 15px;
+}
+/*.table-view .corner {
+    -fx-background-color: transparent;
+}
+.table-view .column-header .label{
+
+   -fx-text-fill: white;
+   -fx-font-weight: bold;
+   -fx-alignment: CENTER_LEFT;
+}
+.table-view .cell{
+   -fx-cell-size: 30;
+  -fx-alignment: center-left;
+  -fx-text-fill: #000000;
+  -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-row-cell:selected {
+    -fx-background-color:   #FA2C56;
+ }
+ .table-row-cell:selected .text {
+        -fx-fill : white ;
+
+ }
+/* scroll bar starts here */
+
+/* The increment and decrement button CSS class of scrollbar */
+/*.table-view .increment-button ,.table-view .decrement-button {
+    -fx-background-color:transparent;
+	-fx-background-radius: 2em;
+
+}*/
+
+/* The main scrollbar **track** CSS class  */
+/*.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track{
+	-fx-background-color: transparent;
+	-fx-border-color:derive( #00FFFF, 80%);
+	-fx-background-radius: 2em;
+	-fx-border-radius:2em;
+}*/
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+/*.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #00FFFF,90%);
+	-fx-background-insets: 2, 0, 0;
+	-fx-background-radius: 2em;
+
+}*/
+
+/* chart properties */
+
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: transparent;
+    -fx-legend-visible: false;
+}
+.chart-plot-background {
+    -fx-background-color:transparent;
+}
+
+.chart-pie {
+    -fx-border-color: derive(-fx-pie-color, 1%);
+    -fx-border-width: 0px;
+}
+.linear-grad
+{
+    -fx-background-color: linear-gradient(to bottom left, #A868A0, #2D75E8);
+}
