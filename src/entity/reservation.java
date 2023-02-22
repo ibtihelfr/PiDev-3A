@@ -13,6 +13,10 @@ public class reservation {
     private event idEvent;
     private User idUser;
 
+    public reservation(int idRes) {
+        this.idRes = idRes;
+    }
+
     public reservation(int idRes, event idEvent, User idUser) {
         this.idRes = idRes;
         this.idEvent = idEvent;
@@ -23,6 +27,7 @@ public class reservation {
         this.idEvent = idEvent;
         this.idUser = idUser;
     }
+    
 
     public int getIdRes() {
         return idRes;
@@ -50,8 +55,11 @@ public class reservation {
 
     @Override
     public String toString() {
-        return "reservation{" + "idRes=" + idRes + ", idEvent=" + idEvent + ", idUser=" + idUser + '}';
+        return "reservation{" + "idRes=" + idRes + ", idEvent=" + idEvent.getIdEvent() +",NomEvent="+ idEvent.getNomEvent()+", idUser=" + idUser.getIdUser()+", NomUser=" + idUser.getNomUser()+ '}';
+      //return"hello";
     }
+
+   
     
     
 }

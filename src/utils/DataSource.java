@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author ASUS
  */
 public class DataSource {
-    private String url="jdbc:mysql://localhost:3306/tunmix";
+     private String url="jdbc:mysql://localhost:3306/tunmix";
    private String login="root";
    private String pwd="";
    private Connection cnx;

@@ -18,6 +18,21 @@ public class User {
     private String typeUser;
     private String photo;
 
+    public User(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public User(int idUser, String nomUser) {
+        this.idUser = idUser;
+        this.nomUser = nomUser;
+    }
+
+    public User(int idUser, String nomUser, String prenomUser) {
+        this.idUser = idUser;
+        this.nomUser = nomUser;
+        this.prenomUser = prenomUser;
+    }
+
     public User(int idUser, String nomUser, String prenomUser, String pwd, String email, int numTel, String typeUser, String photo) {
         this.idUser = idUser;
         this.nomUser = nomUser;
