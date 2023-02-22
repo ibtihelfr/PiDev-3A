@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="330.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AjouterOffreController">
+    <children>
+      <Rectangle id="btn" arcHeight="5.0" arcWidth="5.0" height="357.0" stroke="#2f3459" strokeType="INSIDE" width="536.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.990521327014218" startX="1.0" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9200000166893005" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5137255191802979" green="0.03921568766236305" blue="0.03921568766236305" opacity="0.9300000071525574" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill></Rectangle>
+      <Button id="add_button" fx:id="add_button" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#add_offre" prefHeight="34.0" prefWidth="150.0" stylesheets="@../Assets/Styles.css" text="Enregister ">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <ChoiceBox fx:id="resto_choice_field" layoutX="146.0" layoutY="130.0" prefHeight="25.0" prefWidth="266.0" />
+      <Label id="label_form" layoutX="144.0" layoutY="102.0" text="Restaurant" textFill="#ebebeb" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#261e2e" height="48.0" layoutY="23.0" stroke="#3d291d" strokeType="INSIDE" width="536.0" />
+      <Text fill="WHITE" layoutX="20.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter offre">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#261e2e" height="81.0" layoutX="399.0" layoutY="10.0" stroke="#5e001e" strokeType="INSIDE" width="115.0" />
+      <ImageView fitHeight="74.0" fitWidth="115.0" layoutX="402.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/logo.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="price_field" layoutX="148.0" layoutY="252.0" prefHeight="25.0" prefWidth="266.0" />
+      <Label id="label_form" layoutX="152.0" layoutY="228.0" prefHeight="17.0" prefWidth="176.0" text="Prix" textFill="#f5f4f4" />
+      <ChoiceBox fx:id="hotel_choice_field" layoutX="148.0" layoutY="193.0" prefHeight="25.0" prefWidth="266.0" />
+      <Label id="label_form" layoutX="146.0" layoutY="165.0" text="Logement" textFill="WHITE" />
+   </children>
+</AnchorPane>
