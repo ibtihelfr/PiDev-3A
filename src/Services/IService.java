@@ -1,26 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Services;
+package tunmix.services;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  *
- * @author Brahim
+ * @author Asma Laaribi
+ * @param <R>
  */
-public interface IService<P> {
-
-    void ajouter(P p) ;
-
-    void update(P p) ;
-
-    void supprime(P p) ;
-
-    List<P> readAll() ;
-
-    P findById(int IdProduit) ;
+public interface IService<R> {
+    void insert(R r);
+    void delete(R r);
+    void update(R r);
+    List<R> readAll();
+    R readById(int idReclamation);    
 }
+
+    
+
