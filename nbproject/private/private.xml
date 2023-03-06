@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/tunmix/src/gui/AccueilEventController.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/tunmix/src/service/EventService.java</file>
             <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/tunmix/src/gui/TestFXMain.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/tunmix/src/gui/AjoutEventController.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/tunmix/src/gui/MenuController.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/tunmix/src/gui/AjoutEvent.fxml</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/tunmix/src/gui/ReadEventController.java</file>
+            <file>file:/C:/Users/ASUS/Documents/NetBeansProjects/tunmix/src/gui/AccueilEvent.fxml</file>
         </group>
     </open-files>
 </project-private>

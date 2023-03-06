@@ -21,18 +21,12 @@ public class TestFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception{
-        
-        
         Parent root=FXMLLoader.load(getClass().getResource("ReadEvent.fxml"));
-        
         Scene scene = new Scene(root);
-        
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("TunMix!");
         primaryStage.setScene(scene);
         primaryStage.show();
-        
     }
-
     /**
      * @param args the command line arguments
      */

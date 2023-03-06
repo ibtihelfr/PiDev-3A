@@ -8,6 +8,7 @@ import entity.event;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,6 +63,7 @@ public class AjoutEventController implements Initializable {
     private ImageView PhotoE;
 
     
+    String path="";
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -79,6 +81,8 @@ public class AjoutEventController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
     if (selectedFile != null) {
         // load the selected image into the image view
+         path=selectedFile.getAbsolutePath();
+        //System.out.println(path);
         Image image = new Image(selectedFile.toURI().toString());
         PhotoE.setImage(image);
     }
@@ -86,39 +90,69 @@ public class AjoutEventController implements Initializable {
     }
     @FXML
     void AjoutEvent(ActionEvent event) throws IOException{
-        Image photo = PhotoE.getImage();
-        event e=new event(NomEvent.getText(),
-                DateDebut.getValue(),
-                DateFin.getValue(),
-                Localisation.getText(),
-                Description.getText(),
-                HeureEvent.getText(), 
-                Float.valueOf(Prix.getText()), 
-                photo.toString());
-        EventService ES=new EventService();
-        ES.insert(e);
-           
-         try {
-                Parent page1 = FXMLLoader.load(getClass().getResource("ReadEvent.fxml"));
-                Scene scene = new Scene(page1);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-                  
+    String nom = NomEvent.getText().trim();
+    String localisation = Localisation.getText().trim();
+    String description = Description.getText().trim();
+    String heure = HeureEvent.getText().trim();
+    String prixStr = Prix.getText().trim();
+    Image photo = PhotoE.getImage();
+       // System.out.println(photo);
 
-
-     
-            } catch (IOException ex) {
-                Logger.getLogger(AjoutEventController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-         
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation");
+    if (nom.isEmpty() || localisation.isEmpty() || description.isEmpty() || heure.isEmpty() || prixStr.isEmpty() || photo == null) {
+        // Show an error message if any required fields are empty
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
         alert.setHeaderText(null);
-        alert.setContentText("Evenement ajouté avec succès !");
+        alert.setContentText("Veuillez remplir tous les champs obligatoires !");
         alert.showAndWait();
-        
+        return;
+    }
+
+    // Validate the Prix field
+    float prix;
+    try {
+        prix = Float.parseFloat(prixStr);
+        if (prix <= 0) {
+            throw new NumberFormatException();
+        }
+    } catch (NumberFormatException e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText("Le champ Prix doit être un nombre positif !");
+        alert.showAndWait();
+        return;
+    }
+
+    // Create the event object and insert it into the database
+    LocalDate dateDebut = DateDebut.getValue();
+    LocalDate dateFin = DateFin.getValue();
+    if (dateDebut == null || dateFin == null || dateDebut.isAfter(dateFin)) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText("La date de début doit être antérieure à la date de fin !");
+        alert.showAndWait();
+        return;
+    }
+    event e = new event(nom, dateDebut, dateFin, localisation, description, heure, prix, path);
+    EventService ES = new EventService();
+    ES.insert(e);
+
+    // Show a success message and navigate back to the ReadEvent view
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation");
+    alert.setHeaderText(null);
+    alert.setContentText("Evenement ajouté avec succès !");
+    alert.showAndWait();
+
+    Parent page1 = FXMLLoader.load(getClass().getResource("ReadEvent.fxml"));
+    Scene scene = new Scene(page1);
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
 
     }
+    
     
 }

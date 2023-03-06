@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="660.0" styleClass="bg-form" stylesheets="@login%20desin.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ReadEventController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" styleClass="bg-form" stylesheets="@login%20desin.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ReadEventController">
    <children>
-      <TableView fx:id="table" layoutX="17.0" layoutY="83.0" prefHeight="226.0" prefWidth="633.0">
+      <TableView fx:id="table" layoutX="251.0" layoutY="151.0" prefHeight="294.0" prefWidth="534.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="25.60003662109375" text="id" />
           <TableColumn fx:id="nom" prefWidth="73.5999755859375" text="NomEvent" />
@@ -22,41 +25,63 @@
             <TableColumn fx:id="Desc" prefWidth="84.79998779296875" text="Description" />
             <TableColumn fx:id="heure" prefWidth="59.199951171875" text="heure" />
             <TableColumn fx:id="prix" prefWidth="59.199951171875" text="Prix " />
-            <TableColumn fx:id="photo" prefWidth="88.00006103515625" text="Photo" />
         </columns>
+         <effect>
+            <ColorAdjust brightness="-0.24" contrast="0.21" hue="0.19" saturation="0.08" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor>
       </TableView>
-      <Button layoutX="24.0" layoutY="326.0" mnemonicParsing="false" onAction="#ToAjouter" prefHeight="30.0" prefWidth="83.0" styleClass="login-btn" stylesheets="@login%20desin.css" text="Ajouter" textFill="#eae3e3">
+      <Button layoutX="14.0" layoutY="340.0" mnemonicParsing="false" onAction="#ToAjouter" prefHeight="30.0" prefWidth="98.0" stylesheets="@login%20desin.css" text="       Ajouter" textFill="#1e1d1d">
+         <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font>
+         <styleClass>
+            <String fx:value="login-btn" />
+            <String fx:value="ali-box" />
+         </styleClass></Button>
+      <Button layoutX="135.0" layoutY="387.0" mnemonicParsing="false" onAction="#update" prefHeight="30.0" prefWidth="97.0" styleClass="login-btn" stylesheets="@login%20desin.css" text="      Modifier">
+          
+          <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font></Button>
+      <Button layoutX="135.0" layoutY="340.0" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="98.0" styleClass="login-btn" stylesheets="@login%20desin.css" text="     Supprimer" textFill="#181717">
          <font>
             <Font name="Berlin Sans FB" size="12.0" />
          </font></Button>
-      <Button layoutX="119.0" layoutY="326.0" mnemonicParsing="false" onAction="#update" prefHeight="30.0" prefWidth="83.0" styleClass="login-btn" stylesheets="@login%20desin.css" text="Modifier" textFill="#eae3e3">
-         <font>
-            <Font name="Berlin Sans FB" size="12.0" />
-         </font></Button>
-      <Button layoutX="214.0" layoutY="326.0" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="83.0" styleClass="login-btn" stylesheets="@login%20desin.css" text="Supprimer" textFill="#eae3e3">
-         <font>
-            <Font name="Berlin Sans FB" size="12.0" />
-         </font></Button>
-      <Button layoutX="525.0" layoutY="427.0" mnemonicParsing="false" onAction="#Reserver" styleClass="login-btn" stylesheets="@login%20desin.css" text="Reserver" textFill="#efb4b4">
-         <font>
-            <Font name="Berlin Sans FB" size="12.0" />
-         </font></Button>
-      <Text fill="WHITE" layoutX="377.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saisir votre ID" textAlignment="CENTER" wrappingWidth="105.18569946289062">
-         <font>
-            <Font name="Sylfaen" size="12.0" />
-         </font></Text>
-      <ComboBox fx:id="userComboBox" layoutX="483.0" layoutY="389.0" prefWidth="150.0" />
-      <Hyperlink layoutX="494.0" layoutY="462.0" onAction="#Consulter_reservaion" stylesheets="@login%20desin.css" text="Consulter Reservation" />
-      <Text fill="#f2eaea" layoutX="158.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les évènement disponible" wrappingWidth="397.47076416015625">
+      <Hyperlink layoutX="563.0" layoutY="24.0" onAction="#Consulter_reservaion" prefHeight="23.0" prefWidth="229.0" stylesheets="@login%20desin.css" text="Consulter la liste de Reservation" />
+      <Text fill="#151515" layoutX="184.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les évènement disponible" wrappingWidth="397.47076416015625">
          <font>
             <Font name="Snap ITC" size="24.0" />
          </font>
       </Text>
-      <Line endX="100.0" layoutX="541.0" layoutY="348.0" startX="-100.0" />
-      <Text fill="#ecebeb" layoutX="506.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reserver" textAlignment="CENTER" wrappingWidth="83.19999999999993">
-         <font>
-            <Font name="SimSun" size="15.0" />
-         </font>
-      </Text>
+      <ImageView fx:id="imageSet" fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
+      <Hyperlink layoutX="695.0" layoutY="124.0" onAction="#Contrat" text="Voir le contrat" />
+      <ImageView fitHeight="40.0" fitWidth="34.0" layoutX="759.0" layoutY="4.0">
+         <image>
+            <Image url="@../photos/analytics.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="34.0" layoutX="661.0" layoutY="120.0">
+         <image>
+            <Image url="@../photos/signature.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="28.0" layoutX="135.0" layoutY="345.0">
+         <image>
+            <Image url="@../photos/garbage-can-with-recycling-symbol.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="141.0" layoutY="391.0">
+         <image>
+            <Image url="@../photos/edit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="14.0" layoutY="340.0">
+         <image>
+            <Image url="@../photos/add.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -5,6 +5,7 @@
 package gui;
 
 import entity.event;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -73,51 +75,56 @@ public class ModifierEventController implements Initializable {
 
     @FXML
     void modifierButton(ActionEvent event) throws IOException{
-        String nomEvent = nom.getText();
-        String localisationEvent = Localisation.getText();
-        LocalDate dateDebutEvent = DateDebut.getValue();
-        LocalDate dateFinEvent = DateFin.getValue();
-        String heureEvent = heure.getText();
-        String descriptionEvent = Description.getText();
-        float prixEvenement = Float.parseFloat(prix.getText());
-        String photoE = eventToUpdate.getPhotoE();
+    String nomEvent = nom.getText();
+    String localisationEvent = Localisation.getText();
+    LocalDate dateDebutEvent = DateDebut.getValue();
+    LocalDate dateFinEvent = DateFin.getValue();
+    String heureEvent = heure.getText();
+    String descriptionEvent = Description.getText();
+    float prixEvenement = Float.parseFloat(prix.getText());
+    String photoE = eventToUpdate.getPhotoE();
 
-        // Mettre à jour l'objet event
-        eventToUpdate.setNomEvent(nomEvent);
-        eventToUpdate.setLocalisation(localisationEvent);
-        eventToUpdate.setDateDebut(dateDebutEvent);
-        eventToUpdate.setDateFin(dateFinEvent);
-        eventToUpdate.setHeureEvent(heureEvent);
-        eventToUpdate.setDescription(descriptionEvent);
-        eventToUpdate.setPrix(prixEvenement);
-        eventToUpdate.setPhotoE(photoE);
-
-        // Mettre à jour l'événement dans la base de données
-        EventService es = new EventService();
-        es.update(eventToUpdate);
-
-          Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Modifier");
+    // Contrôle de saisie
+    if (nomEvent.isEmpty() || localisationEvent.isEmpty() || dateDebutEvent == null || dateFinEvent == null || heureEvent.isEmpty() || descriptionEvent.isEmpty() || prixEvenement == 0.0) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Champ(s) vide(s)");
         alert.setHeaderText(null);
-        alert.setContentText("Modification avec succés!");
+        alert.setContentText("Veuillez remplir tous les champs!");
         alert.showAndWait();
-        
-        
-        
-        try {
-                Parent page1 = FXMLLoader.load(getClass().getResource("ReadEvent.fxml"));
-                Scene scene = new Scene(page1);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-                  
+        return;
+    }
 
+    // Mettre à jour l'objet event
+    eventToUpdate.setNomEvent(nomEvent);
+    eventToUpdate.setLocalisation(localisationEvent);
+    eventToUpdate.setDateDebut(dateDebutEvent);
+    eventToUpdate.setDateFin(dateFinEvent);
+    eventToUpdate.setHeureEvent(heureEvent);
+    eventToUpdate.setDescription(descriptionEvent);
+    eventToUpdate.setPrix(prixEvenement);
+    eventToUpdate.setPhotoE(photoE);
 
-     
-            } catch (IOException ex) {
-                Logger.getLogger(AjoutEventController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    // Mettre à jour l'événement dans la base de données
+    EventService es = new EventService();
+    es.update(eventToUpdate);
 
+    // Afficher une alerte pour signaler que la mise à jour est réussie
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Modifier");
+    alert.setHeaderText(null);
+    alert.setContentText("Modification avec succés!");
+    alert.showAndWait();
+
+    // Naviguer vers la page de lecture des événements
+    try {
+        Parent page1 = FXMLLoader.load(getClass().getResource("ReadEvent.fxml"));
+        Scene scene = new Scene(page1);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException ex) {
+        Logger.getLogger(AjoutEventController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     @FXML
@@ -127,7 +134,7 @@ public class ModifierEventController implements Initializable {
         fileChooser.setTitle("Modifier la photo de l'événement");
         Stage stage = (Stage) modifierPhoto.getScene().getWindow();
         eventToUpdate.setPhotoE(fileChooser.showOpenDialog(stage).getAbsolutePath());
-   
+        
           
         
 
@@ -145,6 +152,10 @@ public class ModifierEventController implements Initializable {
         heure.setText(eventToUpdate.getHeureEvent());
         Description.setText(eventToUpdate.getDescription());
         prix.setText(String.valueOf(eventToUpdate.getPrix()));
+        Image image = new Image(new File(eventToUpdate.getPhotoE()).toURI().toString());
+PhotoE.setImage(image);
+       
+
     }
 
     @Override

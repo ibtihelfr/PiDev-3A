@@ -16,4 +16,6 @@ public interface IReservation<T> {
     void update(T t);
     List<T> readAll();
     T readById(int id);  
+    int  getTotalReservations();
+    List<Object[]>  getReservationsPerEvent();
 }

@@ -1,15 +1,13 @@
 package gui;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import entity.User;
 import entity.event;
-import entity.reservation;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,11 +22,38 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import com.itextpdf.text.Image.*;
 
 import javafx.stage.Stage;
 import service.ResService;
 import service.UserService;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import static com.itextpdf.text.pdf.BidiOrder.PDF;
+import static com.itextpdf.text.pdf.PdfName.PDF;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.print.DocFlavor.URL.PDF;
+//import com.itextpdf.text.com.itextpdf.text.Chunk;
+import com.itextpdf.text.pdf.draw.LineSeparator;
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.BLACK;
+
+
+
+
 
 
 public class ReadEventController implements Initializable{
@@ -53,27 +78,35 @@ public class ReadEventController implements Initializable{
 
     @FXML
     private TableColumn<event, String> nom;
-
-    @FXML
-    private TableColumn<event, String> photo;
+     
+   
 
     @FXML
     private TableColumn<event, Float> prix;
 
     @FXML
     private TableView<event> table;
-     @FXML
-    private ComboBox<User> userComboBox;
+//     @FXML
+//    private ComboBox<User> userComboBox;
+        @FXML
+    private ImageView imageSet;
 
+        
+        // Constants for image positioning and scaling
+private static final int IMAGE_X = 100;
+private static final int IMAGE_Y = 500;
+private static final int IMAGE_WIDTH = 400;
+private static final int IMAGE_HEIGHT = 400;
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         UserService userService = new UserService();
         List<User> users = userService.readIdNom();
            
-        ObservableList<User> userData = FXCollections.observableArrayList(users);
-        userComboBox.setItems(userData);
+//        ObservableList<User> userData = FXCollections.observableArrayList(users);
+//        userComboBox.setItems(userData);
         
         
         EventService Es=new EventService();
@@ -93,9 +126,21 @@ public class ReadEventController implements Initializable{
             DFin.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
             heure.setCellValueFactory(new PropertyValueFactory<>("heureEvent"));
             Desc.setCellValueFactory(new PropertyValueFactory<>("Description"));
-            photo.setCellValueFactory(new PropertyValueFactory<>("photoE"));
+            
             prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
             
+            
+            //afficher le image 
+ 
+        table.setOnMouseClicked(event -> {
+        // Get the selected event
+        event selectedEvent = table.getSelectionModel().getSelectedItem();
+        if (selectedEvent != null) {
+            // Update the ImageView with the event's photo
+            Image image = new Image(new File(selectedEvent.getPhotoE()).toURI().toString());
+            imageSet.setImage(image);
+        }
+    });
     } 
       @FXML
     void ToAjouter(ActionEvent event) {
@@ -124,17 +169,14 @@ public class ReadEventController implements Initializable{
             Parent root = (Parent) loader.load();
             ModifierEventController controller = loader.getController();
             controller.setEvent(selectedEvent);
+            
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(ReadEventController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.setContentText("Modification avec succès !");
-        alert.showAndWait();
+        
         
        }
     }
@@ -172,35 +214,6 @@ public class ReadEventController implements Initializable{
 
     }
     
-      @FXML
-    void Reserver(ActionEvent event) {
-            if (table.getSelectionModel().getSelectedItem() != null){
-                 event selectedEvent = table.getSelectionModel().getSelectedItem();
-               User selectedUser = userComboBox.getSelectionModel().getSelectedItem();
-    reservation r = new reservation(selectedEvent.getIdEvent(), selectedEvent, selectedUser);
-    ResService RS = new ResService();
-    RS.insert(r);
-                   
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Félicitation");
-        alert.setHeaderText(null);
-        alert.setContentText("Reservation ajouté avec succès !");
-        alert.showAndWait();
-         
-                         
-                         
-                 
-            }
-            else{
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Réservation");
-        alert.setHeaderText(null);
-        alert.setContentText("Selectionner Votre ID et l'event que tu va reserver !");
-        alert.showAndWait();
-                
-            }
-
-    }
     @FXML
     void Consulter_reservaion(ActionEvent event) {
         try {
@@ -217,6 +230,75 @@ public class ReadEventController implements Initializable{
                 Logger.getLogger(ReadEventController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+    }
+     @FXML
+    void Contrat(ActionEvent event) {
+        
+        
+if (table.getSelectionModel().getSelectedItem() != null) {
+        // Récupérer les données de l'événement sélectionné
+        event selectedEvent = table.getSelectionModel().getSelectedItem();
+        
+           Document document = new Document();
+         try {
+            // Créer un écrivain PDF
+            PdfWriter.getInstance(document, new FileOutputStream("..\\tunmix\\src\\DocumentContrat\\"+selectedEvent.getNomEvent()+"Contrat.pdf"));
+
+            // Ouvrir le document
+            document.open();
+            Font titleFont = FontFactory.getFont("Loki Cola", 24, Font.BOLD, BaseColor.BLACK);
+            Paragraph title = new Paragraph(selectedEvent.getNomEvent()+"_Contrat", titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.add(new Chunk(new LineSeparator(0.1f, 100, BaseColor.BLACK, Element.ALIGN_CENTER, -2f)));
+            document.add(title);
+            // Ajouter du texte au document
+                // Add the image to the document
+//                com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(selectedEvent.getPhotoE());
+//                image.setAbsolutePosition(IMAGE_X, IMAGE_Y);
+//                image.scaleToFit(IMAGE_WIDTH, IMAGE_HEIGHT);
+//                document.add(image);
+//                
+//                Paragraph emptySpace = new Paragraph("", FontFactory.getFont("Loki Cola", 12));
+//                emptySpace.setSpacingAfter(100f);
+//                document.add(emptySpace);
+//        
+//            document.add(new Paragraph("Description : "+selectedEvent.getDescription()));
+//            document.add(new Paragraph("Localisation : "+selectedEvent.getLocalisation()));
+//            document.add(new Paragraph("Heure : "+selectedEvent.getHeureEvent()));
+//            document.add(new Paragraph("Prix du ticket : "+selectedEvent.getPrix()));
+//            document.add(new Paragraph("Date debut : "+selectedEvent.getDateDebut()+" Date Fin : "+selectedEvent.getDateFin()));
+
+Paragraph emptySpace = new Paragraph("", FontFactory.getFont("Loki Cola", 12));
+emptySpace.setSpacingAfter(20f);
+document.add(emptySpace);
+document.add(new Paragraph("Description : "+selectedEvent.getDescription()));
+document.add(new Paragraph("Localisation : "+selectedEvent.getLocalisation()));
+document.add(new Paragraph("Heure : "+selectedEvent.getHeureEvent()));
+document.add(new Paragraph("Prix du ticket : "+selectedEvent.getPrix()));
+document.add(new Paragraph("Date debut : "+selectedEvent.getDateDebut()+" Date Fin : "+selectedEvent.getDateFin()));
+//
+//Paragraph emptySpace = new Paragraph("", FontFactory.getFont("Loki Cola", 12));
+//emptySpace.setSpacingAfter(20f);
+//document.add(emptySpace);
+
+com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance(selectedEvent.getPhotoE());
+image.scaleToFit(IMAGE_WIDTH, IMAGE_HEIGHT);
+image.setAbsolutePosition(IMAGE_X, IMAGE_Y - IMAGE_HEIGHT - 20f); // position ajustée en fonction de la taille de l'image et de l'espacement
+document.add(image);
+
+
+            // Fermer le document
+            document.close();
+
+            // Ouvrir le document PDF avec le lecteur de PDF par défaut
+            Desktop.getDesktop().open(new File("..\\tunmix\\src\\DocumentContrat\\"+selectedEvent.getNomEvent()+"Contrat.pdf"));
+        } catch (DocumentException | IOException ex) {
+            Logger.getLogger(ReadEventController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+       }
     }
     
     

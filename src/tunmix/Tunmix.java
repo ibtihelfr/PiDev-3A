@@ -51,7 +51,7 @@ public class Tunmix {
         System.out.println("---------------------------------");
         
        // ES.recherche("sousse").forEach(System.out::println);
-        
+        System.out.println(ES.CountEvent()) ;
 
     }
     

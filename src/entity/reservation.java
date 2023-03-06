@@ -27,6 +27,9 @@ public class reservation {
         this.idEvent = idEvent;
         this.idUser = idUser;
     }
+
+    public reservation() {
+    }
     
 
     public int getIdRes() {

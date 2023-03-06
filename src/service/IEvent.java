@@ -16,6 +16,7 @@ public interface IEvent<T> {
     void delete(T t);
     void update(T t);
     List<T> readAll();
+    int CountEvent();
   
     T readById(int id);  
     ObservableList<T> recherche(String charac);

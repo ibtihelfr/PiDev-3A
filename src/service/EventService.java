@@ -160,6 +160,21 @@ public class EventService implements IEvent<event>{
     }
     return list;
 }
+
+    @Override
+    public int CountEvent() {
+       int count = 0;
+    String query = "SELECT COUNT(*) FROM event";
+    try (Statement statement = conn.createStatement();
+         ResultSet resultSet = statement.executeQuery(query)) {
+        if (resultSet.next()) {
+            count = resultSet.getInt(1);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return count;
+    }
 }
 
             

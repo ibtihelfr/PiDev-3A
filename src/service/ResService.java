@@ -130,6 +130,42 @@ String requete="update reservation set idEvent=?, idUser=? where IdRes=?";
     }
     return r;
     }
+    
+    
+    
+    public int getTotalReservations() {
+    String requete = "SELECT COUNT(*) AS total FROM reservation";
+    int totalReservations = 0;
+    try {
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(requete);
+        if (rs.next()) {
+            totalReservations = rs.getInt("total");
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(ResService.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return totalReservations;
+}
+    
+ public List<Object[]> getReservationsPerEvent() {
+    String requete = "SELECT e.NomEvent, COUNT(r.idRes) AS total FROM reservation r " +
+                     "JOIN event e ON r.idEvent=e.idEvent " +
+                     "GROUP BY r.idEvent";
+    List<Object[]> reservationsPerEvent = new ArrayList<>();
+    try {
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(requete);
+        while (rs.next()) {
+            String nomEvent = rs.getString("NomEvent");
+            int totalReservations = rs.getInt("total");
+            reservationsPerEvent.add(new Object[] {nomEvent, totalReservations});
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(ResService.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return reservationsPerEvent;
+}
         
     }
     

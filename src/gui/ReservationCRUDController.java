@@ -12,10 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import entity.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +28,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import service.ResService;
 
 /**
@@ -38,18 +43,16 @@ public class ReservationCRUDController implements Initializable {
     @FXML
     private TableColumn<reservation, Integer> res;
     @FXML
-    private TableColumn<reservation, Integer> ev;
+    private TableColumn<reservation, String> ev;
     @FXML
-    private TableColumn<reservation, Integer> us;
+    private TableColumn<reservation, String> us;
+    
+
+
     
         @FXML
     private TableView<reservation> table;
-       
-
-
-    /**
-     * Initializes the controller class.
-     */
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
@@ -60,17 +63,15 @@ public class ReservationCRUDController implements Initializable {
         
         table.setItems(reservationData);
         res.setCellValueFactory(new PropertyValueFactory<>("idRes"));
-    ev.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdEvent().getIdEvent()).asObject());
-    us.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdUser().getIdUser()).asObject());
+   // ev.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdEvent().getIdEvent()).asObject());
+        us.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdUser().getNomUser()));
 
-          
-    }    
+          ev.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdEvent().getNomEvent()));
+         
+                   }
 
     
 
-    @FXML
-    private void Modifier_Res(ActionEvent event) {
-    }
 
     @FXML
     private void Supp_Res(ActionEvent event) {
@@ -111,6 +112,25 @@ public class ReservationCRUDController implements Initializable {
                 Logger.getLogger(ReservationCRUDController.class.getName()).log(Level.SEVERE, null, ex);
             }
        
+    }
+       @FXML
+    void GoToStatistique(ActionEvent event) throws IOException {
+ try {
+            Parent root = FXMLLoader.load(getClass().getResource("statistique.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = new Stage();
+            primaryStage.initStyle(StageStyle.TRANSPARENT);
+            primaryStage.setScene(scene);
+            scene.setFill(Color.TRANSPARENT);
+            primaryStage.show();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+
     }
     
 }
