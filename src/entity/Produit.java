@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author Brahim
@@ -13,11 +15,12 @@ public class Produit {
     private int IdProduit;
     private String NomProduit;
     private String DescProduit;
-    private int DateProduit;
+    private Date DateProduit;
     private float PrixProduit ;
     private int Qte;
     private String PhotoP;
     private int IdCategorie;
+    
   public Produit (){
     }
     public Produit (int idProduit){
@@ -28,18 +31,15 @@ public class Produit {
         this.IdProduit = idProduit;
         this.NomProduit = NomProduit;
     }
-    public Produit(String NomProduit, String DescProduit, int DateProduit, float PrixProduit, int Qte, String PhotoP,int IdCategorie) {
+    public Produit(String NomProduit, String DescProduit, Date DateProduit, float PrixProduit, int Qte, String PhotoP,int IdCategorie) {
         this.NomProduit = NomProduit;
         this.DescProduit = DescProduit;
         this.DateProduit = DateProduit;
         this.PrixProduit = PrixProduit;
         this.Qte = Qte;
         this.PhotoP = PhotoP;
-        this.IdCategorie = IdCategorie;
-        
-        
+        this.IdCategorie = IdCategorie;   
     }
-
     public Produit(int IdProduit , String NomProduit, String DescProduit, int DateProduit, float PrixProduit,int Qte, String PhotoP,int IdCategorie) {
         
         this.IdProduit = IdProduit;
@@ -75,11 +75,11 @@ public class Produit {
         this.DescProduit = DescProduit;
     }
 
-    public int getDateProduit() {
+    public Date getDateProduit() {
         return DateProduit;
     }
 
-    public void setDateProduit(int DateProduit) {
+    public void setDateProduit(Date DateProduit) {
         this.DateProduit = DateProduit;
     }
 

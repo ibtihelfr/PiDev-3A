@@ -15,7 +15,6 @@ import entity.User;
 import services.ProduitService;
 import services.ReclamationService;
 import services.UserService;
-
 import javax.mail.MessagingException;
 import java.net.URL;
 import java.sql.Date;
@@ -28,10 +27,8 @@ public class FXMLAjoutReclamationProduit implements Initializable {
 
     @FXML
     public TextField motifInput;
-
     @FXML
     public TextField etatInput;
-
     @FXML
     public ComboBox<String> comboBox;
     @FXML

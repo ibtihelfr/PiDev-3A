@@ -124,8 +124,4 @@ public class User {
     public String toString() {
         return nomUser + " " + prenomUser;
     }
-    
-    
-    
-    
 }
