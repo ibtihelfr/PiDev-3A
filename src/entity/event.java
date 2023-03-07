@@ -26,6 +26,10 @@ public class event {
     public event(int idEvent){
         this.idEvent = idEvent  ; 
     }
+    public event(int idEvent, String NomEvent){
+        this.idEvent = idEvent;
+        this.NomEvent = NomEvent;
+    }
     public event(int idEvent, String NomEvent, LocalDate DateDebut, LocalDate DateFin, String Localisation, String Descripton, String Heure, Float prix, String PhotoE) {
         this.idEvent = idEvent;
         this.NomEvent = NomEvent;
@@ -123,7 +127,7 @@ public class event {
 
     @Override
     public String toString() {
-        return "event{" + "idEvent=" + idEvent + ", NomEvent=" + NomEvent + ", DateDebut=" + DateDebut + ", DateFin=" + DateFin + ", Localisation=" + Localisation + ", Descripton=" + Descripton + ", Heure=" + Heure + ", prix=" + prix + ", PhotoE=" + PhotoE + '}';
+        return NomEvent;
     }
     
     

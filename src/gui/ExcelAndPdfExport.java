@@ -45,7 +45,7 @@ public class ExcelAndPdfExport {
 
 
             while (query_set.next()) {
-                String dept_id = query_set.getString("NomReclamation");
+                String dept_id = query_set.getString("Description");
                 table_cell = new PdfPCell(new Phrase(Font.BOLD, dept_id));
                 my_report_table.addCell(table_cell);
                 String dept_name = query_set.getString("DateReclamation");
@@ -85,7 +85,7 @@ public class ExcelAndPdfExport {
         com.itextpdf.text.Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(BaseColor.BLACK);
 
-        cell.setPhrase(new Phrase("Nom Réclamation", font));
+        cell.setPhrase(new Phrase("Description", font));
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Date Réclamation", font));

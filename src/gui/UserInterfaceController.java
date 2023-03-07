@@ -15,7 +15,6 @@ public class UserInterfaceController {
 
     @FXML
     public Button addReclamationProductButton;
-
     @FXML
     public Button addReclamationEventButton;
 

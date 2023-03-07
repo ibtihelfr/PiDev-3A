@@ -27,14 +27,17 @@ public class EventService {
         connection = DataSource.getInstance().getCnx();
     }
 
-    public ObservableList readAllEventsIds() {
+    public ObservableList readAllEvents() {
         String requete = "select * from event";
-        ObservableList<String> eventList = FXCollections.observableArrayList();
+        ObservableList<event> eventList = FXCollections.observableArrayList();
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(requete);
             while (resultSet.next()) {
-                eventList.add(resultSet.getString("idEvent"));
+                int id = resultSet.getInt("IdEvent");
+                String nom = resultSet.getString("NomEvent");
+                event evt = new event(id, nom);
+                eventList.add(evt);
             }
         } catch (SQLException ex) {
             Logger.getLogger(EventService.class.getName()).log(Level.SEVERE, null, ex);

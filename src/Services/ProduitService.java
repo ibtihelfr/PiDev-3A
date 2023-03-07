@@ -30,12 +30,16 @@ public class ProduitService {
 
     public ObservableList readAllProduitsIds() {
         String requete = "select * from produit";
-        ObservableList<String> produitList = FXCollections.observableArrayList();
+        ObservableList<Produit> produitList = FXCollections.observableArrayList();
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(requete);
             while (resultSet.next()) {
-                produitList.add(resultSet.getString("idProduit"));
+                int id = resultSet.getInt("IdProduit");
+                String nom = resultSet.getString("NomProduit");
+                
+                 Produit pdt = new Produit(id,nom);
+                produitList.add(pdt);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProduitService.class.getName()).log(Level.SEVERE, null, ex);

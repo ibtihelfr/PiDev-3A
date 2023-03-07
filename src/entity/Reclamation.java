@@ -14,12 +14,14 @@ public class Reclamation {
     private User user;
     private Produit produit;
     private event event;
-    private String nomReclamation;
-    private String historique;
+    private String description;
     private Date dateReclamation;
     private String etatReclamation;
     private String motif;
     private String reponse;
+    private int idUser;
+    private String nomUser;
+    private String prenomUser;
 
     public Reclamation() {
     }
@@ -27,39 +29,46 @@ public class Reclamation {
     public Reclamation(int idReclamation) {
         this.idReclamation = idReclamation;
     }
-    
-    
-    
-   public Reclamation( int idReclamation , Produit produit, event event, String nomReclamation, String historique, Date dateReclamation, String etatReclamation, String motif,String reponse) {
+   public Reclamation( int idReclamation , Produit produit, event event, String description, Date dateReclamation, String etatReclamation, String motif,String reponse) {
         this.idReclamation = idReclamation ; 
         this.produit = produit;
         this.event = event;
-        this.nomReclamation = nomReclamation;
-        this.historique = historique;
+        this.description = description;
         this.dateReclamation = dateReclamation;
         this.etatReclamation = etatReclamation;
         this.motif = motif;
         this.reponse=reponse;
     }
    
-   
-     
-   public Reclamation( int idReclamation  , String nomReclamation, String historique, Date dateReclamation, String etatReclamation, String motif,String reponse) {
+   public Reclamation( int idReclamation  , String description, Date dateReclamation, String etatReclamation, String motif,String reponse) {
         this.idReclamation = idReclamation ; 
-        this.nomReclamation = nomReclamation;
-        this.historique = historique;
+        this.description = description;
         this.dateReclamation = dateReclamation;
         this.etatReclamation = etatReclamation;
         this.motif = motif;
         this.reponse=reponse;
 
     }
+   
+   
+     
+   public Reclamation( int idReclamation  , String description, Date dateReclamation, String etatReclamation, String motif,String reponse, int idUser, String nomUser, String prenomUser) {
+        this.idReclamation = idReclamation ; 
+        this.description = description;
+        this.dateReclamation = dateReclamation;
+        this.etatReclamation = etatReclamation;
+        this.motif = motif;
+        this.reponse=reponse;
+        this.idUser=idUser;
+        this.nomUser=nomUser;
+        this.prenomUser=prenomUser;
+
+    }
   
-   public Reclamation( int idReclamation , User user , String nomReclamation, String historique, Date dateReclamation, String etatReclamation, String motif,String reponse) {
+   public Reclamation( int idReclamation , User user , String description, Date dateReclamation, String etatReclamation, String motif,String reponse) {
         this.idReclamation = idReclamation ; 
         this.user=user;
-        this.nomReclamation = nomReclamation;
-        this.historique = historique;
+        this.description = description;
         this.dateReclamation = dateReclamation;
         this.etatReclamation = etatReclamation;
         this.motif = motif;
@@ -68,11 +77,10 @@ public class Reclamation {
     }
     
     
-        public Reclamation( User user, Produit produit, String nomReclamation, String historique, Date dateReclamation, String etatReclamation, String motif, String reponse) {
+        public Reclamation( User user, Produit produit, String description, Date dateReclamation, String etatReclamation, String motif, String reponse) {
         this.produit = produit;
         this.user=user;
-        this.nomReclamation = nomReclamation;
-        this.historique = historique;
+        this.description = description;
         this.dateReclamation = dateReclamation;
        this.etatReclamation = etatReclamation;
         this.motif = motif;
@@ -80,11 +88,10 @@ public class Reclamation {
 
     }
 
-    public Reclamation( User user,event event, String nomReclamation, String historique, Date dateReclamation, String etatReclamation, String motif, String reponse) {
+    public Reclamation( User user,event event, String description, Date dateReclamation, String etatReclamation, String motif, String reponse) {
         this.user=user;
         this.event = event;
-        this.nomReclamation = nomReclamation;
-        this.historique = historique;
+        this.description = description;
         this.dateReclamation = dateReclamation;
         this.etatReclamation = etatReclamation;
         this.motif = motif;
@@ -93,6 +100,38 @@ public class Reclamation {
 }
     
     
+
+    public void setIdReclamation(int idReclamation) {
+        this.idReclamation = idReclamation;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public void setNomUser(String nomUser) {
+        this.nomUser = nomUser;
+    }
+
+    public void setPrenomUser(String prenomUser) {
+        this.prenomUser = prenomUser;
+    }
+
+    public int getIdReclamation() {
+        return idReclamation;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public String getNomUser() {
+        return nomUser;
+    }
+
+    public String getPrenomUser() {
+        return prenomUser;
+    }
     
      public String getReponse() {
      return reponse;
@@ -136,20 +175,12 @@ public class Reclamation {
         this.event = event;
     }
 
-    public String getNomReclamation() {
-        return nomReclamation;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNomReclamation(String nomReclamation) {
-        this.nomReclamation = nomReclamation;
-    }
-
-    public String getHistorique() {
-        return historique;
-    }
-
-    public void setHistorique(String historique) {
-        this.historique = historique;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getDateReclamation() {
@@ -178,7 +209,7 @@ public class Reclamation {
 
     @Override
     public String toString() {
-        return "Reclamation{" + "user=" + user + ", idReclamation=" + idReclamation + ", produit=" + produit + ", event=" + event + ", nomReclamation=" + nomReclamation + ", historique=" + historique + ", dateReclamation=" + dateReclamation + ", etatReclamation=" + etatReclamation + ", motif=" + motif + '}';
+        return "Reclamation{" + "user=" + user + ", idReclamation=" + idReclamation + ", produit=" + produit + ", event=" + event + ", description=" + description + ", dateReclamation=" + dateReclamation + ", etatReclamation=" + etatReclamation + ", motif=" + motif + '}';
     }
     
     

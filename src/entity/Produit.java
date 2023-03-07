@@ -23,6 +23,11 @@ public class Produit {
     public Produit (int idProduit){
         this.IdProduit= idProduit ; 
     }
+    
+      public Produit(int idProduit, String NomProduit){
+        this.IdProduit = idProduit;
+        this.NomProduit = NomProduit;
+    }
     public Produit(String NomProduit, String DescProduit, int DateProduit, float PrixProduit, int Qte, String PhotoP,int IdCategorie) {
         this.NomProduit = NomProduit;
         this.DescProduit = DescProduit;
@@ -112,7 +117,7 @@ public class Produit {
 
     @Override
     public String toString() {
-        return "Produit{" + "IdProduit=" + IdProduit + ", NomProduit=" + NomProduit + ", DescProduit=" + DescProduit + ", DateProduit=" + DateProduit + ", PrixProduit=" + PrixProduit + ", Qte=" + Qte + ", PhotoP=" + PhotoP + ", NomProduit=" + NomProduit + '}';
+        return NomProduit;
     }
     
     

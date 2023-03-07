@@ -24,6 +24,17 @@ public class User {
         public User(int idUser){
         this.idUser = idUser;
     }
+        public User(int idUser, String nomUser , String prenomUser){
+        this.idUser = idUser;
+        this.nomUser = nomUser;
+        this.prenomUser= prenomUser;
+    }
+        public User(String nomUser , String prenomUser){
+        this.nomUser = nomUser;
+        this.prenomUser= prenomUser;
+    }
+        
+        
     public User(int idUser, String nomUser, String prenomUser, String pwd, String email, int numTel, String typeUser, String photo) {
         this.idUser = idUser;
         this.nomUser = nomUser;
@@ -111,7 +122,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "idUser=" + idUser + ", nomUser=" + nomUser + ", prenomUser=" + prenomUser + ", pwd=" + pwd + ", email=" + email + ", numTel=" + numTel + ", typeUser=" + typeUser + ", photo=" + photo + '}';
+        return nomUser + " " + prenomUser;
     }
     
     

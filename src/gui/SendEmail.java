@@ -32,6 +32,7 @@ public class SendEmail {
         //Create a session with account credentials
         Session session = Session.getInstance(properties,
                 new javax.mail.Authenticator() {
+                    @Override
                     protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
                         return new javax.mail.PasswordAuthentication(myAccountEmail, password);
                     }
@@ -51,7 +52,7 @@ public class SendEmail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("REC URGENT §§§§§§");
+            message.setSubject("REC URGENT !");
             String htmlCode = "<h2><b>Une Réclamation sur un Evenement est créée </b></h2>" +
                     "" +
                     "<img src= " + "https://thumbs.dreamstime.com/b/bouton-de-r%C3%A9clamation-69565221.jpg >";

@@ -12,20 +12,21 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import entity.Reclamation;
+import entity.User;
 import services.ReclamationService;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 
 
 public class AdminInterfaceController implements Initializable {
 
 
     @FXML
-    public TableColumn<Reclamation, String> columnNom;
+    public TableColumn<Reclamation, String> columnDesc;
     @FXML
     public TableColumn<Reclamation, String> columnEtat;
     @FXML
@@ -38,40 +39,46 @@ public class AdminInterfaceController implements Initializable {
 
     @FXML
     public TableView<Reclamation> tableReclamations;
-
     @FXML
-    public TextField nomInput;
+    public TextArea descInput;
     @FXML
     public TextArea reponseInput;
-    @FXML
     public Button showReclamation;
     @FXML
     public Button deleteReclamationButton;
     @FXML
     public Button updateReclamationButton;
-
     @FXML
     public Button downloadPdfButton;
-
     @FXML
     public Button downloadExcelButton;
-
     @FXML
     public Button showStat;
-
     @FXML
     public ComboBox<String> comboBoxEtat;
+    
+    
+    ReclamationService recService = new ReclamationService();
+    @FXML
+    private Button showEnAttente;
+    @FXML
+    private TableColumn<Reclamation, User> columnUser;
 
 
     @Override
-    @FXML
     // Cette méthode sera exécuté lors de lancement de l'interface administrateur ; qui va récupérer la liste des réclamation de la base de données
     // et la mettre dans la table 
+    
     public void initialize(URL url, ResourceBundle rb) {
-        columnNom.setCellValueFactory(new PropertyValueFactory<>("NomReclamation"));
+        columnDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
         columnReponse.setCellValueFactory(new PropertyValueFactory<>("Reponse"));
         columnEtat.setCellValueFactory(new PropertyValueFactory<>("EtatReclamation"));
         columnDate.setCellValueFactory(new PropertyValueFactory<>("DateReclamation"));
+        columnUser.setCellValueFactory(cellData -> {
+        String nomUser = cellData.getValue().getNomUser();
+        String prenomUser = cellData.getValue().getPrenomUser();
+        return new SimpleObjectProperty<>(new User(nomUser, prenomUser));
+});
         columnMotif.setCellValueFactory(new PropertyValueFactory<>("Motif"));
         List<Reclamation> list = new ArrayList<>();
         ReclamationService reclamationService = new ReclamationService();
@@ -79,12 +86,12 @@ public class AdminInterfaceController implements Initializable {
         tableReclamations.setItems((FXCollections.observableArrayList(list)));
     }
 
-    @FXML
     public void showReclamation(ActionEvent event) {
-        columnNom.setCellValueFactory(new PropertyValueFactory<>("NomReclamation"));
+        columnDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
         columnReponse.setCellValueFactory(new PropertyValueFactory<>("Reponse"));
         columnEtat.setCellValueFactory(new PropertyValueFactory<>("EtatReclamation"));
         columnDate.setCellValueFactory(new PropertyValueFactory<>("DateReclamation"));
+        columnUser.setCellValueFactory(new PropertyValueFactory<>("NomUser"));
         columnMotif.setCellValueFactory(new PropertyValueFactory<>("Motif"));
         List<Reclamation> list = new ArrayList<>();
         ReclamationService reclamationService = new ReclamationService();
@@ -104,7 +111,7 @@ public class AdminInterfaceController implements Initializable {
             etatList.add("Traité");
         }
         comboBoxEtat.setItems(etatList);
-        nomInput.setText(reclamation.getNomReclamation());
+        descInput.setText(reclamation.getDescription());
         reponseInput.setText(reclamation.getReponse());
     }
 
@@ -112,13 +119,13 @@ public class AdminInterfaceController implements Initializable {
      //Cette méthode va exécuter l'update de réclamation 
     public void updateReclamation(ActionEvent event) {
         int idreclamation = tableReclamations.getSelectionModel().getSelectedItem().getIdreclamation();
-        String nomReclamation = nomInput.getText();
+        String description = descInput.getText();
         String etatReclamation = comboBoxEtat.getSelectionModel().getSelectedItem();
         String reponseReclamation = reponseInput.getText();
         ReclamationService reclamationService = new ReclamationService();
         Reclamation reclamation = new Reclamation();
         reclamation.setIdreclamation(idreclamation);
-        reclamation.setNomReclamation(nomReclamation);
+        reclamation.setDescription(description);
         reclamation.setEtatReclamation(etatReclamation);
         reclamation.setReponse(reponseReclamation);
         reclamationService.updateReclamation(reclamation);
@@ -132,9 +139,10 @@ public class AdminInterfaceController implements Initializable {
         // Refresh table --> Re-read from database list of claims
         List<Reclamation> list = new ArrayList<>();
         list = reclamationService.readAllReclamations();
+        tableReclamations.getItems().clear();
         tableReclamations.setItems((FXCollections.observableArrayList(list)));
         //Vider les inputs
-        nomInput.clear();
+        descInput.clear();
         reponseInput.clear();
     }
 
@@ -153,6 +161,7 @@ public class AdminInterfaceController implements Initializable {
         alert.showAndWait();
                 // Refresh table --> Re-read from database list of claims
         List<Reclamation> list = new ArrayList<>();
+        tableReclamations.getItems().clear();
         list = reclamationService.readAllReclamations();
         tableReclamations.setItems((FXCollections.observableArrayList(list)));
 
@@ -192,6 +201,36 @@ public class AdminInterfaceController implements Initializable {
         alert.setHeaderText("La Liste des réclamations est bien exporté en Excel ");
         alert.setContentText("OK!");
         alert.showAndWait();
+    }
+    
+    @FXML
+    private void orderByAscDate(ActionEvent event) {
+        tableReclamations.getItems().clear();
+        tableReclamations.setItems((FXCollections.observableArrayList(recService.displayReclamationOrdredByAscDate())));
+    }
+
+    @FXML
+    private void orderByDescDate(ActionEvent event) {
+        tableReclamations.getItems().clear();
+        tableReclamations.setItems((FXCollections.observableArrayList(recService.displayReclamationOrdredByDescDate())));
+    }
+
+    @FXML
+    private void resetSort(ActionEvent event) {
+        tableReclamations.getItems().clear();
+        tableReclamations.setItems((FXCollections.observableArrayList(recService.readAllReclamations())));
+    }
+
+    @FXML
+    private void showTraite(ActionEvent event) {
+        tableReclamations.getItems().clear();
+        tableReclamations.setItems((FXCollections.observableArrayList(recService.readRecTraites())));
+    }
+
+    @FXML
+    private void showEnAttente(ActionEvent event) {
+        tableReclamations.getItems().clear();
+        tableReclamations.setItems((FXCollections.observableArrayList(recService.readRecEnAttente())));
     }
 
 

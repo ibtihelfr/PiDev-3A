@@ -22,11 +22,10 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.scene.control.TextArea;
 
 public class FXMLAjoutReclamationProduit implements Initializable {
 
-    @FXML
-    public TextField nomReclamationInput;
     @FXML
     public TextField motifInput;
 
@@ -36,9 +35,11 @@ public class FXMLAjoutReclamationProduit implements Initializable {
     @FXML
     public ComboBox<String> comboBox;
     @FXML
-    public ComboBox<String> comboBoxUsers;
+    public ComboBox<User> comboBoxUsers;
     @FXML
     public Button ajoutReclamationButton;
+    @FXML
+    private TextArea descriptionInput;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -46,7 +47,7 @@ public class FXMLAjoutReclamationProduit implements Initializable {
         ObservableList produitList = produitService.readAllProduitsIds();
         comboBox.setItems(produitList);
         UserService userService = new UserService();
-        ObservableList usersList = userService.readAllUsersIds();
+        ObservableList<User> usersList = userService.readAllUsers();
         comboBoxUsers.setItems(usersList);
         etatInput.setText("En Attente");
         motifInput.setText("Sur Produit");
@@ -55,11 +56,11 @@ public class FXMLAjoutReclamationProduit implements Initializable {
     @FXML
     public void ajoutReclamationProduit(ActionEvent event) throws SQLException, MessagingException {
         //Controle de saisie
-        if (Objects.equals(nomReclamationInput.getText(), "")) {
+        if (Objects.equals(descriptionInput.getText(), "")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
-            alert.setContentText("Nom Réclamation est Obligatoire");
+            alert.setContentText("La description est Obligatoire");
             alert.showAndWait();
         } else if (comboBoxUsers.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -75,12 +76,12 @@ public class FXMLAjoutReclamationProduit implements Initializable {
             alert.showAndWait();
         } else {
             //Insertion de réclamation sur Produit
-            String nomReclamation = nomReclamationInput.getText();
+            String description = descriptionInput.getText();
             String motifReclamation = motifInput.getText();
             String etatReclamation = etatInput.getText();
             ReclamationService reclamationService = new ReclamationService();
             Reclamation reclamation = new Reclamation();
-            reclamation.setNomReclamation(nomReclamation);
+            reclamation.setDescription(description);
             reclamation.setMotif(motifReclamation);
             reclamation.setDateReclamation(new Date(System.currentTimeMillis()));
             reclamation.setEtatReclamation(etatReclamation);
@@ -88,13 +89,13 @@ public class FXMLAjoutReclamationProduit implements Initializable {
             Produit prod = produitService.retournerProduit(Integer.parseInt(comboBox.getSelectionModel().getSelectedItem()));
             reclamation.setProduit(prod);
             UserService userService = new UserService();
-            User user = userService.retournerUser(Integer.parseInt(comboBoxUsers.getSelectionModel().getSelectedItem()));
+            User user = userService.retournerUser(comboBoxUsers.getSelectionModel().getSelectedItem().getIdUser());
             reclamation.setUser(user);
             reclamationService.insertProductReclamation(reclamation);
             
             // Show Alert 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Ajout de reclamation ");
+            alert.setTitle("Ajout de reclamation sur Produit ");
             alert.setHeaderText("La reclamation est bien ajoutée ");
             alert.setContentText("OK!");
             alert.showAndWait();

@@ -24,14 +24,19 @@ public class UserService {
     }
 
 
-    public ObservableList readAllUsersIds() {
+    public ObservableList readAllUsers() {
         String requete = "select * from user";
-        ObservableList<String> userList = FXCollections.observableArrayList();
+        ObservableList<User> userList = FXCollections.observableArrayList();
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(requete);
             while (resultSet.next()) {
-                userList.add(String.valueOf(resultSet.getInt("IdUser")));
+                int id = resultSet.getInt("IdUser");
+                String nom = resultSet.getString("NomUser");
+                String prenom = resultSet.getString("PrenomUser");
+                User user = new User(id, nom,prenom);
+                
+                userList.add(user);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProduitService.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,7 +50,11 @@ public class UserService {
         ResultSet res = statement.executeQuery("SELECT * FROM user where `IdUser` = " + idUser);
         while (res.next()) {
             int id = res.getInt("IdUser");
+            String nom = res.getString("NomUser");
+            String prenom = res.getString("PrenomUser");
             user.setIdUser(id);
+            user.setNomUser(nom);
+            user.setPrenomUser(prenom);
         }
         return user;
     }

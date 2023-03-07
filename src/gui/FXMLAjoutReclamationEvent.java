@@ -22,31 +22,32 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.scene.control.TextArea;
 
 
 public class FXMLAjoutReclamationEvent implements Initializable {
 
     @FXML
-    public ComboBox<String> comboBox;
+    public ComboBox<event> comboBox;
 
     @FXML
-    public ComboBox<String> comboBoxUsers;
-    @FXML
-    public TextField nomReclamationInput;
+    public ComboBox<User> comboBoxUsers;
     @FXML
     public TextField motifInput;
     @FXML
     public TextField etatInput;
     @FXML
     public Button ajoutReclamationButton;
+    @FXML
+    private TextArea descriptionInput;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     EventService eventService = new EventService();
-        ObservableList eventsList = eventService.readAllEventsIds();
+        ObservableList eventsList = eventService.readAllEvents();
         comboBox.setItems(eventsList);
         UserService userService = new UserService();
-        ObservableList usersList = userService.readAllUsersIds();
+        ObservableList usersList = userService.readAllUsers();
         comboBoxUsers.setItems(usersList);
         etatInput.setText("En Attente");
         motifInput.setText("Sur Evenement");
@@ -54,11 +55,11 @@ public class FXMLAjoutReclamationEvent implements Initializable {
 
     @FXML
     public void ajoutReclamationEvent(ActionEvent event) throws SQLException, MessagingException {
-        if (Objects.equals(nomReclamationInput.getText(), "")) {
+        if (Objects.equals(descriptionInput.getText(), "")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(null);
-            alert.setContentText("Nom Réclamation est Obligatoire");
+            alert.setContentText("La description est Obligatoire");
             alert.showAndWait();
         } else if (comboBoxUsers.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -73,21 +74,20 @@ public class FXMLAjoutReclamationEvent implements Initializable {
             alert.setContentText("L'Evenement est Obligatoire");
             alert.showAndWait();
         } else {
-            String nomReclamation = nomReclamationInput.getText();
+            String description = descriptionInput.getText();
             String motifReclamation = motifInput.getText();
             String etatReclamation = etatInput.getText();
             ReclamationService reclamationService = new ReclamationService();
             Reclamation reclamation = new Reclamation();
-            reclamation.setNomReclamation(nomReclamation);
+            reclamation.setDescription(description);
             reclamation.setMotif(motifReclamation);
             reclamation.setDateReclamation(new Date(System.currentTimeMillis()));
             reclamation.setEtatReclamation(etatReclamation);
             EventService eventService = new EventService();
-            event retournerEvent = eventService.retournerEvent(Integer.parseInt(comboBox.getSelectionModel().getSelectedItem()));
+            event retournerEvent = eventService.retournerEvent(comboBox.getSelectionModel().getSelectedItem().getIdEvent());
             reclamation.setEvent(retournerEvent);
-
             UserService userService = new UserService();
-            User user = userService.retournerUser(Integer.parseInt(comboBoxUsers.getSelectionModel().getSelectedItem()));
+            User user = userService.retournerUser(comboBoxUsers.getSelectionModel().getSelectedItem().getIdUser());
             reclamation.setUser(user);
             reclamationService.insertEventReclamation(reclamation);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
