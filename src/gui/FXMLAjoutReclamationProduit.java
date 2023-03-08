@@ -30,7 +30,7 @@ public class FXMLAjoutReclamationProduit implements Initializable {
     @FXML
     public TextField etatInput;
     @FXML
-    public ComboBox<String> comboBox;
+    public ComboBox<Produit> comboBox;
     @FXML
     public ComboBox<User> comboBoxUsers;
     @FXML
@@ -83,7 +83,7 @@ public class FXMLAjoutReclamationProduit implements Initializable {
             reclamation.setDateReclamation(new Date(System.currentTimeMillis()));
             reclamation.setEtatReclamation(etatReclamation);
             ProduitService produitService = new ProduitService();
-            Produit prod = produitService.retournerProduit(Integer.parseInt(comboBox.getSelectionModel().getSelectedItem()));
+            Produit prod = produitService.retournerProduit(comboBox.getSelectionModel().getSelectedItem().getIdProduit());
             reclamation.setProduit(prod);
             UserService userService = new UserService();
             User user = userService.retournerUser(comboBoxUsers.getSelectionModel().getSelectedItem().getIdUser());
