@@ -23,7 +23,7 @@ public class ExcelAndPdfExport {
         public void exportPdf() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tunmix", "root", "root");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tunmix", "root", "");
             Statement stmt = con.createStatement();
             // Read list of claims from database
             ResultSet query_set = stmt.executeQuery("SELECT * From reclamation");
