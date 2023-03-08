@@ -27,7 +27,7 @@ public class SendEmail {
         //Your gmail address
         String myAccountEmail = "asma.laaribi@esprit.tn"; // mail réservé pour l'application
         //Your gmail password
-        String password = "224JFT0039";
+        String password = "*********";
 
         //Create a session with account credentials
         Session session = Session.getInstance(properties,
