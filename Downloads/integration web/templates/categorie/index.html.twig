@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+
+<section class="ftco-section bg-light">
+    <div class="container">
+    <h1>Categorie index</h1>
+
+        <input id="search_input" type="text" name="search_input" placeholder="Recherche ..."
+               style="margin: 1em 0">
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>Idcategorie</th>
+                <th>Nomcategorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.idcategorie }}</td>
+                <td>{{ categorie.nomcategorie }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_show', {'idcategorie': categorie.idcategorie}) }}">show</a>
+                    <a href="{{ path('app_categorie_edit', {'idcategorie': categorie.idcategorie}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_new') }}">Create new</a>
+
+    </div>
+</section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#search_input").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock %}

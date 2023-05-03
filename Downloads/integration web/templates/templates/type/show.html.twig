@@ -1,0 +1,31 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Type{% endblock %}
+
+{% block body %}
+    <h1>{{ type.NomType }} </h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id du type</th>
+                <td>{{ type.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom Type</th>
+                <td>{{ type.NomType }}</td>
+            </tr>
+        </tbody>
+    </table>
+<div style="display:flex;justify-content: center;align-items: center;">
+    <a  style="margin: 1cm" class="btn btn-secondary btn-sm" href="{{ path('app_type_index') }}">Retour à la liste</a>
+
+    <a style="margin: 1cm"class="btn btn-secondary btn-sm" href="{{ path('app_type_edit', {'id': type.id}) }}">Modifier</a>
+
+</div>
+
+<div class="card-body" style="display:flex;justify-content: center;align-items: center;gap: 1cm;">
+        {{ include('type/_delete_form.html.twig') }}
+</div>
+
+{% endblock %}

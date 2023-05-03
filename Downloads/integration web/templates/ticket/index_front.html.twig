@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ticket index{% endblock %}
+
+{% block body %}
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4">Liste des tickets</h2>
+                <p>La liste des tickets</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Numéro Ticket</th>
+                    <th>Maximum</th>
+                    <th>Demande</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.numticket }}</td>
+                        <td>{{ ticket.nbmaxt }}</td>
+                        <td>{{ ticket.nbtdemande }}</td>
+                        <td>{{ ticket.prixf }}</td>
+                        <td>
+                            <a href="{{ path('ticket_book', {'numticket': ticket.numticket}) }}">Book</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

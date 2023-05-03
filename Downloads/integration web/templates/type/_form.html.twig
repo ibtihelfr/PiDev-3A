@@ -1,0 +1,34 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+<div class="row" style="display:flex;justify-content: center;align-items: center;">
+
+    <div class="col-md-6">
+        <div class="card">
+            <form class="form-horizontal">
+                <div class="card-body">
+
+
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Nom type: </label>
+                        <div class="col-sm-9">
+
+                            {{form_widget( form.NomType,{'attr':{'class':'form-control','placeholder':'Donner type'}}) }}
+                            <small class="form-text text-muted">{{ form_errors(form.NomType) }}</small>
+                            <small>{{ form_help(form.NomType) }}</small>
+                        </div>
+                    </div>
+
+
+
+                <div class="card-body" style="display:flex;justify-content: center;align-items: center;gap: 1cm;">
+
+                    <button class="btn btn-secondary btn-sm" class="btn"  >{{ button_label|default('Enregistrer') }}</button>
+                    <a class="btn btn-secondary btn-sm" href="{{ path('app_type_index') }}">Retour à la liste</a>
+                </div>
+                </div>
+            </form>
+        </div>
+        {{ form_end(form) }}
+
+
+    </div>
+</div>

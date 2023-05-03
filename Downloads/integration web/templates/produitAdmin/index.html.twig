@@ -1,0 +1,48 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <h1>Produit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idproduit</th>
+                <th>Nomproduit</th>
+                <th>Descproduit</th>
+                <th>Dateproduit</th>
+                <th>Prixproduit</th>
+                <th>Qte</th>
+                <th>Photop</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in pagination %}
+            <tr>
+                <td>{{ produit.idproduit }}</td>
+                <td>{{ produit.nomproduit }}</td>
+                <td>{{ produit.descproduit }}</td>
+                <td>{{ produit.dateproduit ? produit.dateproduit|date('Y-m-d') : '' }}</td>
+                <td>{{ produit.prixproduit }}</td>
+                <td>{{ produit.qte }}</td>
+                <td>{{ produit.photop }}</td>
+                <td>
+                    <a href="{{ path('app_produit_back_show', {'idproduit': produit.idproduit}) }}">show</a>
+                    <a href="{{ path('app_produit_back_edit', {'idproduit': produit.idproduit}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_new') }}">Create new</a>
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

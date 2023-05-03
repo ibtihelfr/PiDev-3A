@@ -1,0 +1,42 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Liste des réclamations{% endblock %}
+
+{% block body %}
+    <h1>Liste des réclamations</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id Réclamation</th>
+      <th>Libellé</th>
+      <th>Description</th>
+      <th>Date de la Réclamation</th>
+      <th>État de la Réclamation</th>
+      <th>Photo</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for reclamation in reclamations %}
+      <tr style="background-color: {{ loop.index is even ? '#f2f2f2' : '#ffffff' }};">
+        <td align="center">{{ reclamation.id }}</td>
+        <td>{{ reclamation.Libelle }}</td>
+        <td>{{ reclamation.Description }}</td>
+        <td align="center">{{ reclamation.DateReclamation ? reclamation.DateReclamation|date('Y-m-d') : '' }}</td>
+        <td align="center">{{ reclamation.EtatReclamation }}</td>
+        <td><img src="{{ asset(reclamation.Photo) }}" alt="{{ reclamation.Libelle }}" width="150" height="150"></td>
+        <td align="center">
+          <a href="{{ path('app_reclamation_show_back', {'id': reclamation.id}) }}"><i class="fa fa-eye"></i></a>
+          <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}"><i class="fa fa-pencil"></i></a>
+        </td>
+      </tr>
+    {% else %}
+      <tr>
+        <td colspan="7">Aucune enregistrement trouvé</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+    <br><br>
+{% endblock %}

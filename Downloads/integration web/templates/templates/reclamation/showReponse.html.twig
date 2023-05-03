@@ -1,0 +1,51 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Réponse pour {{ reclamation.Libelle }}{% endblock %}
+
+{% block body %}
+    {%  set l =reclamation.reponses|length %}
+
+    {% if l==1 %}
+        <h1>{{ reclamation.reponses|length }} réponse sur {{ reclamation.Libelle }}</h1>
+    {% else %}
+        <h1>{{ reclamation.reponses|length }} réponses sur {{ reclamation.Libelle }}</h1>
+    {% endif %}
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id du réponse</th>
+            <th>Message</th>
+            <th>Date du réponse</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reclamation.reponses %}
+            <tr>
+                <td>{{ reponse.id }}</td>
+                <td>{{ reponse.Message }}</td>
+                <td>{{ reponse.DateReponse ? reponse.DateReponse|date('Y-m-d') : '' }}</td>
+
+                <td>
+                    {{ include('reponse/_delete_form.html.twig') }}
+                    <a  class="btn text-primary" href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">Modifier la réponse</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="display:flex;justify-content: center;align-items: center;gap: 1cm">
+        <a href="{{ path('app_reponse_new', {'id': reclamation.id})  }}" class="btn btn-primary  ">Répondre</a>
+        <a class="btn-primary btn" style="margin: 1cm" href="{{ path('app_reclamation_show_back', {'id': reclamation.id}) }}">Retour</a>
+
+
+    </div>
+    <br><br>
+{% endblock %}

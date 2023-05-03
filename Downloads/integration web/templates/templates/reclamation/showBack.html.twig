@@ -1,0 +1,59 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 style="text-align: center;">Détails de la réclamation</h1>
+        <hr style="width: 50%;">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th style="width: 30%;">ID de la réclamation :</th>
+                            <td>{{ reclamation.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Libellé :</th>
+                            <td>{{ reclamation.Libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description :</th>
+                            <td>{{ reclamation.Description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de la réclamation :</th>
+                            <td>{{ reclamation.DateReclamation ? reclamation.DateReclamation|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>État de la réclamation :</th>
+                            <td>{{ reclamation.EtatReclamation }}</td>
+                        </tr>
+                        <tr>
+                            <th>Photo :</th>
+                            <td>{{ reclamation.Photo }}</td>
+                        </tr>
+                        <tr>
+                            <th>Réponse :</th>
+                            {% set l = reclamation.reponses|length %}
+                            {% if l == 1 %}
+                                <td>{{ l }} réponse</td>
+                            {% else %}
+                                <td>{{ l }} réponses</td>
+                            {% endif %}
+                            <td><a class="btn btn-success" href="{{ path('app_reclamation_show_reponse', {'id': reclamation.id}) }}">Afficher la réponse</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <a class="btn btn-primary" href="{{ path('app_reclamation_index_back') }}">Retour à la liste</a>
+            <div style="margin-left: 1cm;">
+                {{ include('reclamation/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

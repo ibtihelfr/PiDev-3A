@@ -1,0 +1,55 @@
+{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+{{ form_errors(form) }}
+    <div class="row align-items-end">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.nbmaxt) }}
+                {{ form_widget(form.nbmaxt) }}
+                <div class="text-danger">
+                    {{ form_errors(form.nbmaxt) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.nbtdemande) }}
+                {{ form_widget(form.nbtdemande) }}
+                <div class="text-danger">
+                    {{ form_errors(form.nbtdemande) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.prixf) }}
+                {{ form_widget(form.prixf) }}
+                <div class="text-danger">
+                    {{ form_errors(form.prixf) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.idres) }}
+                {{ form_widget(form.idres) }}
+                <div class="text-danger">
+                    {{ form_errors(form.idres) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.idevent) }}
+                {{ form_widget(form.idevent) }}
+                <div class="text-danger">
+                    {{ form_errors(form.idevent) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+                <div class="form-group">
+                    <button class="btn btn-primary py-3 px-5">{{ button_label|default('Save') }}</button>
+                </div>
+        </div>
+    </div>
+{{ form_end(form) }}

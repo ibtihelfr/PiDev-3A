@@ -1,0 +1,13 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit Type{% endblock %}
+
+{% block body %}
+    <h1>Modifier</h1>
+
+    {{ include('type/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+
+
+    {{ include('type/_delete_form.html.twig') }}
+{% endblock %}

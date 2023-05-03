@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les réclamations {% endblock %}
+{% block titlePage %}<h1>{{ reclamation.Libelle }}</h1>{% endblock %}
+{% block body %}
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id Réclamation</th>
+                <td>{{ reclamation.id }}</td>
+            </tr>
+            <tr>
+                <th>Libellé</th>
+                <td>{{ reclamation.Libelle }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reclamation.Description }}</td>
+            </tr>
+            <tr>
+                <th>Date du réclamation</th>
+                <td>{{ reclamation.DateReclamation ? reclamation.DateReclamation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Etat du réclamation</th>
+                <td>{{ reclamation.EtatReclamation }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ reclamation.Photo }}</td>
+            </tr>
+        </tbody>
+    </table>
+<div style="display:flex;justify-content: center;align-items: center;">
+    <a class="btn-primary btn" style="margin: 1cm" href="{{ path('app_reclamation_index') }}"> Retour à la liste </a>
+
+    <a class="btn-primary btn"href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">Modifier</a>
+</div>
+<div style="display:flex;justify-content: center;align-items: center;">
+    {{ include('reclamation/_delete_form.html.twig') }}
+</div>
+    <br><br>
+{% endblock %}

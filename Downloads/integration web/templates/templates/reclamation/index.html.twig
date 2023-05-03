@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes réclamations{% endblock %}
+
+{% block body %}
+<section class="ftco-section ftco-degree-bg">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h1 class="mb-4">Mes réclamations</h1>
+        {% for reclamation in reclamations %}
+          <div class="card mb-4">
+            {% set img = reclamation.Photo %}
+            <img class="card-img-top" src="{{ asset(img) }}" alt="Image de la réclamation">
+            <div class="card-body">
+              <h2 class="card-title">{{ reclamation.Libelle }}</h2>
+              <p class="card-text">{{ reclamation.Description }}</p>
+              <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}" class="btn btn-primary">Voir la réclamation</a>
+            </div>
+            <div class="card-footer text-muted">
+              <div class="row">
+                <div class="col-md-4">
+                  <small class="text-muted">Réclamation créée le {{ reclamation.DateReclamation|date('Y-m-d') }}</small>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-muted">État de la réclamation : {{ reclamation.EtatReclamation }}</small>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-muted">Nombre de réponses : {{ reclamation.reponses|length }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="alert alert-info" role="alert">
+            Vous n'avez pas encore créé de réclamation.
+          </div>
+        {% endfor %}
+        {{ knp_pagination_render(reclamations) }}
+        <div class="text-center mt-4">
+          <a href="{{ path('app_reclamation_new') }}" class="btn btn-primary">Créer une réclamation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

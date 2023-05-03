@@ -1,0 +1,115 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Liste des types{% endblock %}
+
+{% block body %}
+    <h1>Liste des types</h1>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Nom du type</th>
+                <th class="text-center">Nombre de réclamations</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type in types %}
+            <tr>
+                <td class="text-center">{{ type.id }}</td>
+                <td>{{ type.NomType }}</td>
+                <td class="text-center">{{ type.reclamations|length }}</td>
+                <td class="text-center">
+                    <a class="btn btn-primary btn-sm" href="{{ path('app_type_show', {'id': type.id}) }}">Afficher</a>
+                    <a class="btn btn-warning btn-sm" href="{{ path('app_type_edit', {'id': type.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" class="text-center">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="card-body" style="display:flex;justify-content: center;align-items: center;gap: 1cm;">
+
+    <a class="btn btn-info btn-sm" href="{{ path('app_type_new') }}">Ajouter un type</a>
+</div>
+<br><br>
+    <div class="card-body" style="display:flex;justify-content: center;align-items: center;gap: 1cm;">
+    <canvas id="myChart" style="width:100%;max-width:600px;text-align: center"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+        <script>
+            var xValues = [];
+            var yValues = [];
+            {% for type in types %}
+            xValues.push("{{ type.NomType }}");
+            yValues.push("{{ type.reclamations|length }}");
+            {% endfor %}
+
+            new Chart("myChart", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+
+                    datasets: [{
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 2,
+                        data: yValues,
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Nombre des réclamations dans chaque type ",
+                        fontColor: 'rgba(120,10,10,1.8)', // sets font color for y-axis labels
+
+                    },
+                    animation: {
+                        duration: 5000,
+                        easing: 'easeOutBounce' // add a bouncing effect at the end of the animation
+                    },
+
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                fontColor: 'rgba(120,10,10,1.8)', // sets font color for y-axis labels
+                                fontSize: 14 // sets font size for y-axis labels
+
+                            }
+
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontColor: 'rgba(120,10,10,1.8)', // sets font color for x-axis labels
+                                fontSize: 14 // sets font size for x-axis labels
+                            }
+                        }]
+                    }
+                }
+            });
+
+        </script>
+    </div>
+{% endblock %}

@@ -1,0 +1,102 @@
+<style>
+    @page {
+        size: landscape;
+    }
+
+    body {
+        font-family: Roboto, serif;
+    }
+
+    .certificate-container {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .certificate {
+        border: 10px solid #0C5280;
+        padding: 5px;
+        position: relative;
+    }
+
+    .certificate:after {
+        content: '';
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        background-image: url(https://image.ibb.co/ckrVv7/water_mark_logo.png);
+        background-size: 100%;
+        z-index: -1;
+    }
+
+    .certificate-header > .logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .certificate-title {
+        text-align: center;
+    }
+
+    .certificate-body {
+        text-align: center;
+    }
+
+    h1 {
+
+        font-weight: 400;
+        font-size: 48px;
+        color: #0C5280;
+    }
+
+    .student-name {
+        font-size: 24px;
+    }
+
+    .certificate-content {
+        margin: 0 auto;
+    }
+
+    .about-certificate {
+        width: 380px;
+        margin: 0 auto;
+    }
+
+    .topic-description {
+
+        text-align: center;
+    }
+
+</style>
+<div class="certificate-container">
+    <div class="certificate">
+        <div class="water-mark-overlay"></div>
+        <div class="certificate-header">
+            <img src="/logo" class="logo" alt="">
+        </div>
+        <div class="certificate-body">
+
+            <p class="certificate-title"><strong>TuniMix</strong></p>
+            <h1>Réservation de ticket {{ ticket.numticket }}</h1>
+            <p class="student-name">{{ ticket.nbtdemande }}</p>
+            <div class="certificate-content">
+                <div class="about-certificate">
+                    <p>
+                        pour un prix de {{ ticket.prixf * ticket.nbtdemande }}
+                    </p>
+                </div>
+                <p class="topic-title">
+                    pour evenement {{ ticket.idevent.nomevent }}
+                </p>
+                <div class="text-center">
+                    <p class="topic-description text-muted">
+                        allant de {{ ticket.idevent.datedebut|date('d/m/Y') }}
+                        à {{ ticket.idevent.datefin|date('d/m/Y') }}
+                    </p>
+                </div>
+                <img src="data:image/png;base64,{{ qrCode }}" alt="QR code">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reponse index{% endblock %}
+
+{% block body %}
+    <h1>Reponse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id du réponse</th>
+                <th>Message</th>
+                <th>DateReponse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                <td>{{ reponse.id }}</td>
+                <td>{{ reponse.Message }}</td>
+                <td>{{ reponse.DateReponse ? reponse.DateReponse|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_reponse_show', {'id': reponse.id}) }}">show</a>
+                    <a href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div style="display:flex;justify-content: center;align-items: center;">
+
+        <a class="btn" href="{{ path('app_reponse_new') }}">Ajouter une nouvelle réponse</a>
+    </div>
+
+{% endblock %}

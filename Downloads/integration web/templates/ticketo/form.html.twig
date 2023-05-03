@@ -1,0 +1,37 @@
+{{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
+{{ form_errors(form) }}
+<div class="row align-items-end">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.logement) }}
+            {{ form_widget(form.logement) }}
+            <div class="text-danger">
+                {{ form_errors(form.logement) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.restauration) }}
+            {{ form_widget(form.restauration) }}
+            <div class="text-danger">
+                {{ form_errors(form.restauration) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.prix) }}
+            {{ form_widget(form.prix) }}
+            <div class="text-danger">
+                {{ form_errors(form.prix) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 text-center">
+        <div class="form-group">
+            <button class="btn btn-primary py-3 px-5">{{ button_label|default('Save') }}</button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

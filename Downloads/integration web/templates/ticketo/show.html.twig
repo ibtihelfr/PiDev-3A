@@ -1,0 +1,40 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Ticketo{% endblock %}
+
+{% block body %}
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-3 pb-3">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <h2 class="mb-4">TicketO {{ ticketo.numticketo }}</h2>
+                    <h4>
+                        <a href="{{ path('ticketo_edit', {'numticketo': ticketo.numticketo}) }}">Modifier ce ticketO</a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Logement</th>
+                        <td>{{ ticketo.logement }}</td>
+                    </tr>
+                    <tr>
+                        <th>Restauration</th>
+                        <td>{{ ticketo.restauration }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
+                        <td>{{ ticketo.prix }} DT</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="{{ path('ticketo_index') }}">Retour à la liste</a>
+            {{ include('ticketo/delete.html.twig') }}
+        </div>
+    </section>
+{% endblock %}

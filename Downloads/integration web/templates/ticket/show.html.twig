@@ -1,0 +1,42 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Ticket{% endblock %}
+
+{% block body %}
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-3 pb-3">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <h2 class="mb-4">Ticket {{ ticket.numticket }}</h2>
+                    <h4>
+                        <a href="{{ path('ticket_edit', {'numticket': ticket.numticket}) }}">Modifier ce ticket</a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <table class="table">
+                    <tbody>
+                    MailerController           <tr>
+                        <th>Nbmaxt</th>
+                        <td>{{ ticket.nbmaxt }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nbtdemande</th>
+                        <td>{{ ticket.nbtdemande }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prixf</th>
+                        <td>{{ ticket.prixf }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="{{ path('ticket_index') }}">Retour à la liste</a>
+            {{ include('ticket/delete.html.twig') }}
+        </div>
+    </section>
+
+
+{% endblock %}
